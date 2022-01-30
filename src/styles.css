@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.mar-top-60{
+    margin-top:60px ;
+}
+.mar-btm-10{
+    margin-bottom: 10px;
+}
+
+.mar-top-10{
+    margin-top: 10px;
+}
+.text-right{
+    text-align: right;
+}

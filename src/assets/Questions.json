@@ -1,0 +1,63 @@
+{
+  "patientQuestions": [
+    {
+      "QuestionControl": "ageControl",
+      "title": "Age",
+      "type": "number"
+    },
+    {
+      "QuestionControl": "medicationsControl",
+      "ConrolsToReset": ["medicationsSelectControl","aspirinControl","waterControl","waterLiterControl"],
+      "title": "Are you using any heart medications ?",
+      "type": "radio",
+      "answersLabel": ["Yes", "No"],
+      "answersValue": ["1", "0"],
+      "childItems": [
+        {
+          "parentAnswer": "1",
+          "title": "Select medication",
+          "QuestionControl": "medicationsSelectControl",
+          "ConrolsToReset": ["waterControl","waterLiterControl"],
+          "type": "select",
+          "options": [
+            "Accupril",
+            "Aceon (perindopril)",
+            "Adalat (nifedipine)",
+            "Altace (ramipril)",
+            "Apresoline (hydralazine)",
+            "Aspirin",
+            "Benicar HCT (hydrochlorothiazide and olmesartan)",
+            "Brilinta (ticagrelor)"
+          ],
+          "childItems": [
+            {
+              "parentAnswer": "Aspirin",
+              "QuestionControl": "aspirinControl",
+              "title": "How many times did you tooks Aspirin today?",
+              "type": "number"
+            },
+            {
+              "parentAnswer": "Aspirin",
+              "title": "Did you had any water today?",
+              "type": "radio",
+              "QuestionControl": "waterControl",
+              "answersLabel": ["Yes", "No"],
+              "answersValue": ["1", "0"],
+              "childItems": [
+                {
+                  "parentAnswer": "1",
+                  "title": "Did you drunk more then 1 liter of water today?",
+                  "QuestionControl": "waterLiterControl",
+                  "required": true,
+                  "answersLabel": ["Yes", "No"],
+                  "answersValue": ["1", "0"],
+                  "type": "radio"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

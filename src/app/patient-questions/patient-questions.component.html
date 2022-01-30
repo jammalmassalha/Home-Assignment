@@ -1,0 +1,94 @@
+<div class="container mar-top-60">
+  <!-- Content here -->
+  <div class="row">
+    <div class="col">
+      <form
+        [formGroup]="patientForm"
+        (ngSubmit)="onSubmit()"
+        class="filter-form"
+      >
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Heart Medication Survey</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div *ngFor="let question of Questions; let i = index" class="row">
+              <div
+              *ngIf="
+              question.RelativeToControlName
+                ? patientForm.controls[question.RelativeToControlName].value ===
+                question.ParentAns 
+                : true
+            "
+              >
+                
+                <div
+                  *ngIf="
+                    question.type != 'radio' &&
+                    question.type != 'checkbox' &&
+                    question.type != 'textarea' &&
+                    question.type != 'select'
+                  "
+                  class="col-12 mar-top-10"
+                >
+                  
+                  <mat-form-field>
+                    <p>
+                      <label>{{ question.title }}</label>
+                    </p>
+                    <input
+                      [type]="question.type"
+                      [formControlName]="question.QuestionControl"
+                      matInput
+                    />
+                  </mat-form-field>
+                </div>
+                <div *ngIf="question.type == 'radio'" class="col-12 mar-top-10 mar-btm-10">
+                  <p>
+                    <label>{{ question.title }}</label>
+                  </p>
+
+                  <mat-radio-group [formControlName]="question.QuestionControl">
+                    <mat-radio-button
+                      (change)="question.ConrolsToReset? radioChange($event, question.ConrolsToReset): radioChange($event, [])"
+                      *ngFor="let label of question.answersLabel; let r = index"
+                      [value]="
+                        question.answersValue ? question.answersValue[r] : ''
+                      "
+                      >{{
+                        label
+                      }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</mat-radio-button
+                    >
+                  </mat-radio-group>
+                
+                </div>
+
+                <div *ngIf="question.type == 'select'">
+                  
+                  <mat-form-field>
+                    <p>
+                      <label>{{ question.title }}</label>
+                    </p>
+                    <mat-select (selectionChange)="question.ConrolsToReset? selectChange($event, question.ConrolsToReset): radioChange($event, [])" value="" [formControlName]="question.QuestionControl">
+                      <mat-option
+                        *ngFor="let option of question.options"
+                        [value]="option"
+                      >
+                        {{ option }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </mat-card-content>
+          <mat-card-actions class="text-right">
+            <button mat-raised-button color="primary" type="submit" >
+              Submit
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </form>
+    </div>
+  </div>
+</div>
